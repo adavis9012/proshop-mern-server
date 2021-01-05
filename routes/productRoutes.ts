@@ -7,7 +7,7 @@ const router = express.Router();
 // @desc    Fetch all products
 // @route   Get /api/products
 // @access  Public
-router.get('/', asyncHandler(async (request, response) => {
+router.get('/', asyncHandler(async (request: express.Request, response: express.Response) => {
     const products = await Product.find({});
 
     response.json(products);
@@ -16,7 +16,7 @@ router.get('/', asyncHandler(async (request, response) => {
 // @desc    Fetch single product
 // @route   Get /api/products/:id
 // @access  Public
-router.get('/:id', asyncHandler(async (request, response) => {
+router.get('/:id', asyncHandler(async (request: express.Request, response: express.Response) => {
     const product = await Product.findById(request.params.id);
 
     if (product) {
