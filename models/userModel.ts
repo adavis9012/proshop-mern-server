@@ -1,5 +1,5 @@
-import mongoose, {Document} from "mongoose";
 import bcrypt from "bcryptjs";
+import mongoose, {Document} from "mongoose";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -24,14 +24,14 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-export interface User {
+export interface UserInterface {
     name: string
     email: string
     password: string
     isAdmin: boolean
 }
 
-interface UserDocument extends User, Document {
+export interface UserDocument extends UserInterface, Document {
     matchPassword(enteredPassword: string): boolean
 }
 
