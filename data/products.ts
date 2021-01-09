@@ -81,4 +81,3 @@ const products: Array<ProductInterface> = [
     },
 ]
 
-export default products;

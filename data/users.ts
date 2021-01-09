@@ -18,13 +18,13 @@ const users: UserSchema[] = [
         name: 'John Doe',
         email: 'john@example.com',
         password: bcrypt.hashSync('12345', 10),
-        isAdmin: true,
+        isAdmin: false,
     },
     {
         name: 'Jane Doe',
         email: 'jane@example.com',
         password: bcrypt.hashSync('12345', 10),
-        isAdmin: true,
+        isAdmin: false,
     },
 ];
 
