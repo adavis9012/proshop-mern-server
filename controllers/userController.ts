@@ -35,7 +35,6 @@ const registerUser = asyncHandler(async (request: express.Request, response: exp
     }
 });
 
-
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
@@ -76,8 +75,38 @@ const getUserProfile = asyncHandler(async (request: express.Request, response: e
     throw new Error('User not found');
 });
 
+// @desc    Update User Profile
+// @route   PUT /api/users/profile
+// @access  Private
+const updateUserProfile = asyncHandler(async (request: express.Request, response: express.Response) => {
+    const user = await User.findById(request.user?._id);
+
+    if(user) {
+        user.email = request?.body?.email || user.email;
+        user.name = request?.body?.name || user.name;
+
+        if(request.body.password) {
+            user.password = request.body.password;
+        }
+
+        const updatedUser = await user.save();
+
+        return response.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id),
+        });
+    }
+
+    response.status(404);
+    throw new Error('User not found');
+});
+
 export {
     authUser,
     registerUser,
     getUserProfile,
+    updateUserProfile,
 }
